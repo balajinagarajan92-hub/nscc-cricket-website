@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NSCC Cricket Club - Our Team</title>
+
+    <style>
+        /* Common Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f7f4;
+            color: #064e3b;
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            background: #064e3b;
+            color: white;
+            padding: 22px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: bold;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            margin-left: 28px;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover,
+        .nav-links .active {
+            color: #86efac;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #065f46, #15803d);
+            color: white;
+            text-align: center;
+            padding: 55px 20px;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            font-size: 20px;
+            color: #dcfce7;
+        }
+
+        .hero-line {
+            width: 90px;
+            height: 4px;
+            background: #86efac;
+            margin: 25px auto 0;
+        }
+
+        /* Team Section */
+        .team-section {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 25px;
+        }
+
+        .team-list {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px 20px;
+        }
+
+        /* Player Card */
+        .player-row {
+            display: flex;
+            align-items: center;
+            gap: 22px;
+            background: white;
+            padding: 20px 25px;
+            border-radius: 10px;
+            border: 1px solid #e2eee8;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .player-row:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.09);
+        }
+
+        .player-number {
+            min-width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            background: #065f46;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 21px;
+            font-weight: bold;
+        }
+
+        .player-details {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .player-details h3 {
+            font-size: 21px;
+            margin-bottom: 7px;
+        }
+
+        .player-details p {
+            color: #64748b;
+            font-size: 16px;
+        }
+
+        /* Captain Card */
+        .captain {
+            border: 2px solid #bbf7d0;
+            border-left: 8px solid #065f46;
+            background: #f0fdf4;
+        }
+
+        .captain-badge {
+            background: #065f46;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+
+        /* Footer */
+        .footer {
+            background: #064e3b;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+            font-size: 14px;
+        }
+
+        /* Responsive Design - Mobile */
+        @media (max-width: 700px) {
+            .navbar {
+                flex-direction: column;
+                gap: 18px;
+                padding: 20px 15px;
+            }
+
+            .logo {
+                font-size: 23px;
+            }
+
+            .nav-links {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 12px;
+            }
+
+            .nav-links a {
+                margin: 0;
+                font-size: 14px;
+            }
+
+            .hero {
+                padding: 45px 15px;
+            }
+
+            .hero h1 {
+                font-size: 34px;
+            }
+
+            .hero p {
+                font-size: 16px;
+                line-height: 1.5;
+            }
+
+            .team-section {
+                margin: 25px auto;
+                padding: 0 15px;
+            }
+
+            .team-list {
+                grid-template-columns: 1fr;
+                gap: 14px;
+            }
+
+            .player-row {
+                padding: 16px;
+                gap: 15px;
+            }
+
+            .player-number {
+                min-width: 48px;
+                height: 48px;
+                font-size: 18px;
+            }
+
+            .player-details h3 {
+                font-size: 18px;
+            }
+
+            .player-details p {
+                font-size: 14px;
+            }
+
+            .captain-badge {
+                font-size: 12px;
+                padding: 7px 9px;
+            }
+        }
+
+        /* Very Small Mobile Screens */
+        @media (max-width: 380px) {
+            .player-row {
+                gap: 10px;
+                padding: 12px;
+            }
+
+            .player-number {
+                min-width: 42px;
+                height: 42px;
+                font-size: 16px;
+            }
+
+            .player-details h3 {
+                font-size: 16px;
+            }
+
+            .captain-badge {
+                font-size: 11px;
+                padding: 6px 7px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- Navigation Bar -->
+<nav class="navbar">
+
+    <div class="logo">
+        🏏 NSCC Cricket Club
+    </div>
+
+    <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/team" class="active">Our Team</a>
+        <a href="#">Gallery</a>
+        <a href="#">Contact</a>
+    </div>
+
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+
+    <h1>NSCC Team Players</h1>
+
+    <p>One Team. One Dream. One Championship.</p>
+
+    <div class="hero-line"></div>
+
+</section>
+
+<!-- Team Players Section -->
+<section class="team-section">
+
+    <div class="team-list">
+
+        <!-- Player 01 - Captain -->
+        <div class="player-row captain">
+
+            <div class="player-number">01</div>
+
+            <div class="player-details">
+                <h3>Raja (C)</h3>
+                <p>Team Captain</p>
+            </div>
+
+            <span class="captain-badge">♛ Captain</span>
+
+        </div>
+
+        <!-- Player 02 -->
+        <div class="player-row">
+
+            <div class="player-number">02</div>
+
+            <div class="player-details">
+                <h3>Balaji</h3>
+                <p>Team Player</p>
+            </div>
+
+        </div>
+
+        <!-- Player 03 -->
+        <div class="player-row">
+
+            <div class="player-number">03</div>
+
+            <div class="player-details">
+                <h3>Kishore</h3>
+                <p>Team Player</p>
+            </div>
+
+        </div>
+
+        <!-- Player 04 -->
+        <div class="player-row">
+
+            <div class="player-number">04</div>
+
+            <div class="player-details">
+                <h3>Barath</h3>
+                <p>Team Player</p>
+            </div>
+
+        </div>
+
+        <!-- Player 05 -->
+        <div class="player-row">
+
+            <div class="player-number">05</div>
+
+            <div class="player-details">
+                <h3>Ranjith</h3>
+                <p>Team Player</p>
+            </div>
+
+        </div>
+
+        <!-- Player 06 -->
+        <div class="player-row">
+
+            <div class="player-number">06</div>
+
+            <div class="player-details">
+                <h3>Arul</h3>
+                <p>Team Player</p>
+            </div>
+
+        </div>
+
+        <!-- Player 07 -->
+        <div class="player-row">
+
+            <div class="player-number">07</div>
+
+            <div class="player-details">
+                <h3>Prakash</h3>
+                <p>Team Player</p>
+            </div>
+
+        </div>
+
+        <!-- Player 08 -->
+        <div class="player-row">
+
+            <div class="player-number">08</div>
+
+            <div class="player-details">
+                <h3>Deepan</h3>
+                <p>Team Player</p>
+            </div>
+
+        </div>
+
+        <!-- Player 09 -->
+        <div class="player-row">
+
+            <div class="player-number">09</div>
+
+            <div class="player-details">
+                <h3>Hari</h3>
+                <p>Team Player</p>
+            </div>
+
+        </div>
+
+        <!-- Player 10 -->
+        <div class="player-row">
+
+            <div class="player-number">10</div>
+
+            <div class="player-details">
+                <h3>Deepan Raj</h3>
+                <p>Team Player</p>
+            </div>
+
+        </div>
+
+        <!-- Player 11 -->
+        <div class="player-row">
+
+            <div class="player-number">11</div>
+
+            <div class="player-details">
+                <h3>Vithiyapathy</h3>
+                <p>Team Player</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+    <p>© 2026 NSCC Cricket Club. All Rights Reserved.</p>
+    <p>One Team. One Dream. One Championship.</p>
+</footer>
+
+</body>
+
+</html>

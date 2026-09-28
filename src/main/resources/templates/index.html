@@ -1,0 +1,789 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NSCC Cricket Club</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f8f3;
+            color: #193b27;
+            line-height: 1.7;
+        }
+
+        :root {
+            --dark: #123b25;
+            --green: #267341;
+            --lime: #c8f169;
+            --light: #eaf4e6;
+            --white: #ffffff;
+            --muted: #66776a;
+        }
+
+        /* NAVIGATION */
+
+        .navbar {
+            background: white;
+            padding: 18px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            box-shadow: 0 3px 15px #0000000d;
+        }
+
+        .logo {
+            font-size: 27px;
+            font-weight: 900;
+            color: var(--dark);
+        }
+
+        .logo span {
+            color: var(--green);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 23px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .nav-links a:hover {
+            color: var(--green);
+        }
+
+        /* HERO */
+
+        .hero {
+            background:
+                radial-gradient(circle at 85% 30%,
+                #c8f16930, transparent 30%),
+                linear-gradient(120deg, #10351f, #267341);
+            color: white;
+            padding: 95px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 40px;
+            min-height: 530px;
+        }
+
+        .hero-content {
+            max-width: 700px;
+        }
+
+        .eyebrow {
+            color: #4b925c;
+            font-size: 13px;
+            font-weight: 800;
+            letter-spacing: 3px;
+            margin-bottom: 15px;
+        }
+
+        .hero .eyebrow {
+            color: var(--lime);
+        }
+
+        .hero h1 {
+            font-size: clamp(42px, 6vw, 72px);
+            line-height: 1.12;
+            margin-bottom: 24px;
+        }
+
+        .hero h1 span {
+            color: var(--lime);
+        }
+
+        .hero p {
+            color: #e0eee3;
+            font-size: 17px;
+            max-width: 600px;
+            margin-bottom: 30px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 13px 23px;
+            border-radius: 7px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.25s;
+        }
+
+        .btn-primary {
+            background: var(--lime);
+            color: var(--dark);
+        }
+
+        .btn-primary:hover {
+            background: white;
+            transform: translateY(-3px);
+        }
+
+        .btn-outline {
+            color: white;
+            border: 1px solid #ffffff80;
+        }
+
+        .btn-outline:hover {
+            background: white;
+            color: var(--dark);
+        }
+
+        .hero-ball {
+            flex-shrink: 0;
+            width: 250px;
+            height: 250px;
+            border: 1px solid #ffffff45;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 100px;
+            background: #ffffff0d;
+            box-shadow: 0 0 0 25px #ffffff08;
+        }
+
+        /* STATISTICS */
+
+        .stats {
+            margin: 0 8%;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            background: white;
+            border-radius: 0 0 12px 12px;
+            box-shadow: 0 8px 25px #123b2510;
+        }
+
+        .stat {
+            padding: 27px 15px;
+            text-align: center;
+            border-right: 1px solid #e5ece3;
+        }
+
+        .stat:last-child {
+            border-right: none;
+        }
+
+        .stat h2 {
+            font-size: 32px;
+            color: var(--green);
+        }
+
+        .stat p {
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        /* COMMON SECTION */
+
+        .section {
+            padding: 80px 8%;
+        }
+
+        .section-heading {
+            text-align: center;
+            max-width: 750px;
+            margin: 0 auto 40px;
+        }
+
+        .section-heading h2 {
+            font-size: clamp(29px, 4vw, 40px);
+            line-height: 1.25;
+            margin-bottom: 16px;
+            color: var(--dark);
+        }
+
+        .section-heading p {
+            color: var(--muted);
+        }
+
+        /* ABOUT */
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        .about-card {
+            background: white;
+            border: 1px solid #e4ece1;
+            padding: 30px;
+            border-radius: 12px;
+        }
+
+        .about-card h3 {
+            color: var(--green);
+            font-size: 22px;
+            margin-bottom: 12px;
+        }
+
+        .about-card p {
+            color: var(--muted);
+        }
+
+        /* TEAM VALUES */
+
+        .values {
+            background: var(--light);
+        }
+
+        .value-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .value-card {
+            background: white;
+            padding: 30px 25px;
+            border-radius: 12px;
+            border: 1px solid #e0ebdc;
+        }
+
+        .value-icon {
+            font-size: 35px;
+            margin-bottom: 12px;
+        }
+
+        .value-card h3 {
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+
+        .value-card p {
+            color: var(--muted);
+            font-size: 15px;
+        }
+
+        /* CAPTAIN */
+
+        .captain {
+            background: var(--dark);
+            color: white;
+            padding: 65px 10%;
+            text-align: center;
+        }
+
+        .captain .eyebrow {
+            color: var(--lime);
+        }
+
+        .captain h2 {
+            font-size: 34px;
+            margin-bottom: 20px;
+        }
+
+        .captain blockquote {
+            max-width: 800px;
+            margin: 0 auto 20px;
+            color: #e0eee3;
+            font-size: 18px;
+            font-style: italic;
+        }
+
+        .captain-name {
+            color: var(--lime);
+            font-weight: bold;
+        }
+
+        /* MATCHES */
+
+        .match-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        .match-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid #e4ece1;
+        }
+
+        .match-card h3 {
+            color: var(--green);
+            margin-bottom: 15px;
+        }
+
+        .match-card p {
+            color: var(--muted);
+            margin: 6px 0;
+        }
+
+        .note {
+            font-size: 13px;
+            color: #7b877e;
+            margin-top: 15px;
+        }
+
+        /* GALLERY */
+
+        .gallery {
+            background: var(--light);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .gallery-box {
+            min-height: 170px;
+            padding: 25px;
+            border-radius: 12px;
+            background: white;
+            border: 1px dashed #a5bba5;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .gallery-box span {
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+
+        .gallery-box h3 {
+            font-size: 17px;
+        }
+
+        .gallery-box p {
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        /* CONTACT */
+
+        .contact {
+            text-align: center;
+        }
+
+        .contact-box {
+            max-width: 700px;
+            margin: auto;
+            padding: 35px;
+            background: white;
+            border: 1px solid #e4ece1;
+            border-radius: 12px;
+        }
+
+        .contact-box p {
+            color: var(--muted);
+            margin: 8px 0;
+        }
+
+        /* FOOTER */
+
+        footer {
+            background: #0c2c1a;
+            color: #dce9df;
+            padding: 30px 8%;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-size: 24px;
+            font-weight: 900;
+            color: white;
+        }
+
+        .footer-logo span {
+            color: var(--lime);
+        }
+
+        .copyright {
+            margin-top: 15px;
+            font-size: 13px;
+            color: #a9c0af;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 850px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding: 70px 6%;
+            }
+
+            .hero p {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .buttons {
+                justify-content: center;
+            }
+
+            .hero-ball {
+                width: 190px;
+                height: 190px;
+                font-size: 75px;
+            }
+
+            .about-grid,
+            .match-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .value-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .navbar {
+                flex-direction: column;
+            }
+
+            .nav-links {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .nav-links {
+                gap: 13px;
+            }
+
+            .nav-links a {
+                font-size: 12px;
+            }
+
+            .hero h1 {
+                font-size: 42px;
+            }
+
+            .stats {
+                margin: 0 5%;
+                grid-template-columns: 1fr;
+            }
+
+            .stat {
+                border-right: none;
+                border-bottom: 1px solid #e5ece3;
+            }
+
+            .stat:last-child {
+                border-bottom: none;
+            }
+
+            .section {
+                padding: 60px 6%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- NAVIGATION -->
+<header class="navbar">
+    <div class="logo">NSCC<span>.</span></div>
+
+    <nav class="nav-links">
+        <a href="/">Home</a>
+        <a href="#about">About</a>
+        <a href="#matches">Matches</a>
+        <a href="/gallery">Gallery</a>
+        <a href="/team">Our Team</a>
+        <a href="#contact">Contact</a>
+    </nav>
+</header>
+
+<!-- HOME -->
+<section class="hero">
+    <div class="hero-content">
+        <div class="eyebrow">WELCOME TO NSCC CRICKET CLUB</div>
+
+        <h1>
+            Born To Play.<br>
+            <span>United To Win.</span>
+        </h1>
+
+        <p>
+            More than just a cricket team — we are a family
+            built on passion, friendship, and teamwork.
+            Every match is a new opportunity to give our best.
+        </p>
+
+        <div class="buttons">
+            <a href="/team" class="btn btn-primary">
+                Meet Our Team →
+            </a>
+
+            <a href="#about" class="btn btn-outline">
+                Discover NSCC
+            </a>
+        </div>
+    </div>
+
+    <div class="hero-ball">🏏</div>
+</section>
+
+<!-- STATS -->
+<section class="stats">
+    <div class="stat">
+        <h2>11</h2>
+        <p>Team Players</p>
+    </div>
+
+    <div class="stat">
+        <h2>1</h2>
+        <p>United Team</p>
+    </div>
+
+    <div class="stat">
+        <h2>100%</h2>
+        <p>Team Spirit</p>
+    </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section" id="about">
+    <div class="section-heading">
+        <div class="eyebrow">ABOUT OUR CLUB</div>
+        <h2>More Than Just a Cricket Team</h2>
+
+        <p>
+            NSCC Cricket Club is a team of passionate cricket
+            players united by their love for the game. We believe
+            in supporting one another, playing with discipline,
+            and respecting every opponent.
+        </p>
+    </div>
+
+    <div class="about-grid">
+        <div class="about-card">
+            <h3>🎯 Our Mission</h3>
+            <p>
+                To bring cricket lovers together, encourage
+                teamwork, improve our skills, and promote
+                the spirit of fair play.
+            </p>
+        </div>
+
+        <div class="about-card">
+            <h3>🌟 Our Vision</h3>
+            <p>
+                To build a united cricket team that values
+                commitment, friendship, discipline, and
+                sportsmanship on and off the field.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- TEAM VALUES -->
+<section class="section values">
+    <div class="section-heading">
+        <div class="eyebrow">WHAT MAKES US A TEAM</div>
+        <h2>Our Team Values</h2>
+        <p>
+            The values that bring us together and guide
+            us every time we step onto the field.
+        </p>
+    </div>
+
+    <div class="value-grid">
+        <div class="value-card">
+            <div class="value-icon">🏏</div>
+            <h3>Passion</h3>
+            <p>
+                Our love for cricket motivates us to give
+                our best in every game.
+            </p>
+        </div>
+
+        <div class="value-card">
+            <div class="value-icon">🤝</div>
+            <h3>Teamwork</h3>
+            <p>
+                We stand together, support each other,
+                and work as one team.
+            </p>
+        </div>
+
+        <div class="value-card">
+            <div class="value-icon">🏆</div>
+            <h3>Sportsmanship</h3>
+            <p>
+                We respect our teammates, opponents,
+                and the spirit of cricket.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- CAPTAIN MESSAGE -->
+<section class="captain">
+    <div class="eyebrow">A MESSAGE TO OUR TEAM</div>
+
+    <h2>Captain's Message</h2>
+
+    <blockquote>
+        "Cricket is not just about individual performance.
+        It is about playing together, supporting each other,
+        and giving our best in every match. Let us stay united,
+        respect the game, and make every moment count."
+    </blockquote>
+
+    <div class="captain-name">— Raja, Team Captain</div>
+</section>
+
+<!-- MATCH UPDATES -->
+<section class="section" id="matches">
+    <div class="section-heading">
+        <div class="eyebrow">ON THE FIELD</div>
+        <h2>Matches & Updates</h2>
+        <p>
+            Follow our match results, upcoming fixtures,
+            and memorable moments.
+        </p>
+    </div>
+
+    <div class="match-grid">
+        <div class="match-card">
+            <h3>🏏 Recent Match</h3>
+            <p><strong>Opponent:</strong> To be announced</p>
+            <p><strong>Date:</strong> To be updated</p>
+            <p><strong>Result:</strong> To be updated</p>
+            <p class="note">
+                Match details will be added after the game.
+            </p>
+        </div>
+
+        <div class="match-card">
+            <h3>📅 Upcoming Match</h3>
+            <p><strong>Opponent:</strong> To be announced</p>
+            <p><strong>Date:</strong> To be confirmed</p>
+            <p><strong>Venue:</strong> To be confirmed</p>
+            <p class="note">
+                Fixture details will be announced soon.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- GALLERY -->
+<section class="section gallery" id="gallery">
+    <div class="section-heading">
+        <div class="eyebrow">OUR MEMORIES</div>
+        <h2>NSCC Gallery</h2>
+        <p>
+            Every match creates a memory.
+            Our team photos and match moments will be
+            showcased here.
+        </p>
+    </div>
+
+    <div class="gallery-grid">
+        <div class="gallery-box">
+            <span>📸</span>
+            <h3>Team Moments</h3>
+            <p>Team photos coming soon</p>
+        </div>
+
+        <div class="gallery-box">
+            <span>🏏</span>
+            <h3>Match Day</h3>
+            <p>Match photos coming soon</p>
+        </div>
+
+        <div class="gallery-box">
+            <span>🎉</span>
+            <h3>Celebrations</h3>
+            <p>Special moments coming soon</p>
+        </div>
+    </div>
+</section>
+
+<!-- OUR TEAM -->
+<section class="section">
+    <div class="section-heading">
+        <div class="eyebrow">MEET THE SQUAD</div>
+        <h2>Every Player Matters</h2>
+        <p>
+            Meet our captain and the players who make
+            NSCC a team. Together, we share one passion
+            and one cricketing spirit.
+        </p>
+
+        <br>
+
+        <a href="/team" class="btn btn-primary">
+            Explore Our Team →
+        </a>
+    </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section contact" id="contact">
+    <div class="section-heading">
+        <div class="eyebrow">GET IN TOUCH</div>
+        <h2>Connect With NSCC</h2>
+        <p>
+            Want to connect with our team?
+            Contact details will be added here.
+        </p>
+    </div>
+
+    <div class="contact-box">
+        <p><strong>Club:</strong> NSCC Cricket Club</p>
+        <p><strong>Location:</strong> To be updated</p>
+        <p><strong>Email:</strong> To be updated</p>
+        <p><strong>Instagram:</strong> To be updated</p>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-logo">NSCC<span>.</span></div>
+
+    <p>One Team. One Dream. One Passion.</p>
+
+    <p class="copyright">
+        © 2026 NSCC Cricket Club. All Rights Reserved.
+    </p>
+</footer>
+
+</body>
+</html>

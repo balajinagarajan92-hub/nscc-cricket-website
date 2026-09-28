@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NSCC Cricket Team | Gallery</title>
+
+    <style>
+        /* General Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f7f4;
+            color: #222;
+            line-height: 1.6;
+        }
+
+        /* Navigation Bar */
+        nav {
+            background: #064e3b;
+            color: white;
+            padding: 18px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #a7f3d0;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(
+                135deg,
+                #064e3b,
+                #047857
+            );
+            color: white;
+            text-align: center;
+            padding: 80px 20px;
+        }
+
+        .hero h1 {
+            font-size: 44px;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            font-size: 17px;
+            color: #d1fae5;
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        /* Gallery Section */
+        .gallery-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 65px 25px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 34px;
+            color: #064e3b;
+            margin-bottom: 12px;
+        }
+
+        .section-description {
+            text-align: center;
+            color: #666;
+            font-size: 16px;
+            margin-bottom: 40px;
+        }
+
+        /* Gallery Grid */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 28px;
+        }
+
+        /* Gallery Card */
+        .gallery-card {
+            background: white;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 5px 18px rgba(0, 0, 0, 0.10);
+            transition: transform 0.3s ease,
+                        box-shadow 0.3s ease;
+        }
+
+        .gallery-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.16);
+        }
+
+        /* Gallery Images */
+        .gallery-card img {
+            width: 100%;
+            height: 260px;
+            object-fit: cover;
+            display: block;
+            background: #e5e7eb;
+            cursor: zoom-in;
+        }
+
+        /* Photo Caption */
+        .photo-caption {
+            padding: 17px 15px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            color: #064e3b;
+        }
+
+        /* Back to Team Button */
+        .team-button-section {
+            text-align: center;
+            padding: 0 20px 60px;
+        }
+
+        .team-button {
+            display: inline-block;
+            background: #047857;
+            color: white;
+            text-decoration: none;
+            padding: 14px 30px;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .team-button:hover {
+            background: #064e3b;
+        }
+
+        /* Lightbox Background */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.92);
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+        }
+
+        /* Show Lightbox */
+        .lightbox.active {
+            display: flex;
+        }
+
+        /* Enlarged Image */
+        .lightbox img {
+            max-width: 90%;
+            max-height: 85vh;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            border-radius: 8px;
+            cursor: default;
+        }
+
+        /* Close Button */
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: white;
+            font-size: 42px;
+            font-weight: bold;
+            cursor: pointer;
+            background: none;
+            border: none;
+            line-height: 1;
+            padding: 5px 10px;
+        }
+
+        .lightbox-close:hover {
+            color: #a7f3d0;
+        }
+
+        /* Footer */
+        footer {
+            background: #043b2e;
+            color: white;
+            text-align: center;
+            padding: 28px 15px;
+        }
+
+        footer h3 {
+            font-size: 22px;
+            margin-bottom: 8px;
+        }
+
+        footer p {
+            font-size: 14px;
+            color: #d1fae5;
+            margin: 5px 0;
+        }
+
+        /* Tablet View */
+        @media (max-width: 900px) {
+            .gallery-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            nav {
+                padding: 18px 5%;
+            }
+        }
+
+        /* Mobile View */
+        @media (max-width: 550px) {
+            nav {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .nav-links {
+                justify-content: center;
+                gap: 18px;
+            }
+
+            .hero {
+                padding: 60px 20px;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            .hero p {
+                font-size: 15px;
+            }
+
+            .gallery-section {
+                padding: 45px 18px;
+            }
+
+            .section-title {
+                font-size: 27px;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                gap: 22px;
+            }
+
+            .gallery-card img {
+                height: 250px;
+            }
+
+            /* Mobile Lightbox */
+            .lightbox {
+                padding: 15px;
+            }
+
+            .lightbox img {
+                max-width: 100%;
+                max-height: 80vh;
+            }
+
+            .lightbox-close {
+                top: 10px;
+                right: 20px;
+                font-size: 36px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- Navigation Bar -->
+<nav>
+
+    <div class="logo">
+        NSCC Cricket
+    </div>
+
+    <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/team">Our Team</a>
+        <a href="/gallery" class="active">Gallery</a>
+    </div>
+
+</nav>
+
+
+<!-- Hero Section -->
+<section class="hero">
+
+    <h1>NSCC Photo Gallery</h1>
+
+    <p>
+        Moments on the field, memories with the team.
+        Every match creates a memory.
+    </p>
+
+</section>
+
+
+<!-- Gallery Section -->
+<section class="gallery-section">
+
+    <h2 class="section-title">
+        Our Team Memories
+    </h2>
+
+    <p class="section-description">
+        A collection of NSCC cricket team moments.
+    </p>
+
+
+    <!-- Gallery Photos -->
+    <div class="gallery-grid">
+
+        <!-- Photo 1 -->
+        <div class="gallery-card">
+            <img src="/images/team1.jpeg"
+                 alt="NSCC Cricket Team Photo 1">
+
+            <div class="photo-caption">
+                Team Moments
+            </div>
+        </div>
+
+
+        <!-- Photo 2 -->
+        <div class="gallery-card">
+            <img src="/images/team2.jpeg"
+                 alt="NSCC Cricket Team Photo 2">
+
+            <div class="photo-caption">
+                Together as a Team
+            </div>
+        </div>
+
+
+        <!-- Photo 3 -->
+        <div class="gallery-card">
+            <img src="/images/team3.jpeg"
+                 alt="NSCC Cricket Team Photo 3">
+
+            <div class="photo-caption">
+                On the Cricket Ground
+            </div>
+        </div>
+
+
+        <!-- Photo 4 -->
+        <div class="gallery-card">
+            <img src="/images/team4.jpeg"
+                 alt="NSCC Cricket Team Photo 4">
+
+            <div class="photo-caption">
+                Team Gathering
+            </div>
+        </div>
+
+
+        <!-- Photo 5 -->
+        <div class="gallery-card">
+            <img src="/images/team5.jpeg"
+                 alt="NSCC Cricket Team Photo 5">
+
+            <div class="photo-caption">
+                Cricket Memories
+            </div>
+        </div>
+
+
+        <!-- Photo 6 -->
+        <div class="gallery-card">
+            <img src="/images/team6.jpeg"
+                 alt="NSCC Cricket Team Photo 6">
+
+            <div class="photo-caption">
+                Our Players
+            </div>
+        </div>
+
+
+        <!-- Photo 7 -->
+        <div class="gallery-card">
+            <img src="/images/team7.jpeg"
+                 alt="NSCC Cricket Team Photo 7">
+
+            <div class="photo-caption">
+                Match Day
+            </div>
+        </div>
+
+
+        <!-- Photo 8 -->
+        <div class="gallery-card">
+            <img src="/images/team8.jpeg"
+                 alt="NSCC Cricket Team Photo 8">
+
+            <div class="photo-caption">
+                Team Spirit
+            </div>
+        </div>
+
+
+        <!-- Photo 9 -->
+        <div class="gallery-card">
+            <img src="/images/team9.jpeg"
+                 alt="NSCC Cricket Team Photo 9">
+
+            <div class="photo-caption">
+                NSCC Family
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- Back to Team -->
+<section class="team-button-section">
+
+    <a href="/team" class="team-button">
+        Meet Our Team
+    </a>
+
+</section>
+
+
+<!-- Footer -->
+<footer>
+
+    <h3>NSCC Cricket Team</h3>
+
+    <p>Passion for Cricket. Pride in Our Team.</p>
+
+    <p>
+        &copy; 2026 NSCC Cricket Team.
+        All Rights Reserved.
+    </p>
+
+</footer>
+
+
+<!-- Lightbox: Enlarged Photo View -->
+<div class="lightbox"
+     id="lightbox"
+     role="dialog"
+     aria-modal="true"
+     aria-label="Enlarged team photo">
+
+    <button class="lightbox-close"
+            id="lightboxClose"
+            aria-label="Close image">
+        &times;
+    </button>
+
+    <img id="lightboxImage"
+         src=""
+         alt="Enlarged NSCC Team Photo">
+
+</div>
+
+
+<!-- Lightbox JavaScript -->
+<script>
+
+    document.addEventListener("DOMContentLoaded", function () {
+
+        const lightbox = document.getElementById("lightbox");
+        const lightboxImage = document.getElementById("lightboxImage");
+        const closeButton = document.getElementById("lightboxClose");
+
+        const galleryPhotos =
+            document.querySelectorAll(".gallery-card img");
+
+        console.log("Gallery photos found:", galleryPhotos.length);
+
+        galleryPhotos.forEach(function (photo) {
+
+            photo.addEventListener("click", function () {
+
+                lightboxImage.src = photo.src;
+                lightboxImage.alt = photo.alt;
+
+                lightbox.classList.add("active");
+
+                console.log("Photo clicked:", photo.src);
+            });
+
+        });
+
+        closeButton.addEventListener("click", function () {
+            lightbox.classList.remove("active");
+        });
+
+        lightbox.addEventListener("click", function (event) {
+            if (event.target === lightbox) {
+                lightbox.classList.remove("active");
+            }
+        });
+
+        document.addEventListener("keydown", function (event) {
+            if (event.key === "Escape") {
+                lightbox.classList.remove("active");
+            }
+        });
+
+    });
+
+</script>
+
+</body>
+</html>
